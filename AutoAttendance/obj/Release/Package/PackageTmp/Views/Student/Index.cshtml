@@ -1,0 +1,58 @@
+﻿@model IEnumerable<AutoAttendance.Models.Student>
+
+@{
+    ViewBag.Title = "Student List";
+
+    <div class="text-danger">
+        <h3>@ViewBag.Message</h3>
+    </div>
+}
+
+<h2>Student List</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassName)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Id)*@
+            @Html.ActionLink("Id", "Index", new { sortOrder = ViewBag.idSortParm, className = ViewBag.className })
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Name)*@
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, className = ViewBag.className })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id, className = item.ClassName }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id, className = item.ClassName })
+                @{ViewBag.classNameVal = item.ClassName;}
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="row">
+    <div class="col-md-4">
+        <p>
+            @Html.ActionLink("Create New Student", "Create", "Student", new { className = ViewBag.classNameVal }, new { @class = "btn btn-default" })
+            @Html.ActionLink("View Another Class", "Index", "ClassName", null, new { @class = "btn btn-default" })
+        </p>
+    </div>
+</div>

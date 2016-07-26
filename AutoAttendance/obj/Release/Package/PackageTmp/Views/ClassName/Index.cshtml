@@ -1,0 +1,39 @@
+﻿@model IEnumerable<AutoAttendance.Models.ClassName>
+
+@{
+    ViewBag.Title = "Select Class";
+}
+
+<h2>Select Class</h2>
+@using (Html.BeginForm())
+{
+
+    List<SelectListItem> listItems = new List<SelectListItem>();
+
+    foreach (var item in Model)
+    {
+        listItems.Add(new SelectListItem
+        {
+            Text = item.CName,
+            Value = item.CName
+        });
+
+    }
+
+
+    <p>
+    
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-10">
+                @Html.DropDownList("SelectClass", new SelectList(listItems, "Value", "Text"), new { @class = "btn btn-default dropdown-toggle" })
+                        <input type="submit" value="View Students" class="btn btn-default" />
+                </div>
+            </div>
+            
+        </div>
+    </p>
+
+
+    }
+
